@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using WiredBrainCoffee.DataAccess;
 
 namespace WiredBrainCoffee.ShopInfoTool
 {
@@ -8,13 +10,42 @@ namespace WiredBrainCoffee.ShopInfoTool
         {
             Console.WriteLine("Wired Brain Coffee - Shop Info Tool!");
 
-            Console.WriteLine("Here are my changes! changes made by Thomas blah blah");
+            Console.WriteLine("Write 'help' to list available coffee shop commands, " +
+              "write 'quit' to exit application and here is a message from the first user addded ");
 
-            Console.WriteLine("Some more lines added by Thomas 1 after merge");
-            Console.WriteLine("Some more lines added by Thomas 2");
+            var coffeeShopDataProvider = new CoffeeShopDataProvider();
 
-            Console.WriteLine("Some more lines added by Thomas 3 more changes ");
-            Console.WriteLine("Some more lines added by Thomas 3.1 more changes ");
+            while (true)
+            {
+                var line = Console.ReadLine();
+
+                if (string.Equals("quit", line, StringComparison.OrdinalIgnoreCase))
+                {
+                    break;
+                }
+
+                var coffeeShops = coffeeShopDataProvider.LoadCoffeeShops();
+
+
+                //@@@BorisTest Below is the same implementation the commented once is much better
+                //it is readable and more convenient the short one uncommented looks like a shit just keep it for now 
+                var commandHandler = string.Equals("help", line, StringComparison.OrdinalIgnoreCase)
+                    ? new HelpCommandHandler(coffeeShops) as IHelpCommandHandler
+                    : new CoffeeShopCommandHandler(coffeeShops, line);
+                commandHandler.HandleCommand();
+
+
+                //IHelpCommandHandler commandHandler;
+                //if (string.Equals("help", line, StringComparison.OrdinalIgnoreCase))
+                //{
+                //    commandHandler = new HelpCommandHandler(coffeeShops);
+                //}
+                //else {
+                //    commandHandler = new CoffeeShopCommandHandler(coffeeShops, line);
+                //}
+                //commandHandler.HandleCommand();
+            }
+
         }
     }
 }
