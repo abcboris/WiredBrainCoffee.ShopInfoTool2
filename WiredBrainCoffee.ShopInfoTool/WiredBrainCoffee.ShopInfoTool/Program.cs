@@ -8,7 +8,7 @@ namespace WiredBrainCoffee.ShopInfoTool
         {
             Console.WriteLine("Wired Brain Coffee - Shop Info Tool!");
 
-            Console.WriteLine("Here are my changes!");
+            Console.WriteLine("Here are my changes! changes made by Julia after the first pull request ");
         }
     }
 }
