@@ -12,6 +12,9 @@ namespace WiredBrainCoffee.ShopInfoTool
 
             Console.WriteLine("Some more lines added by Thomas 1 after merge");
             Console.WriteLine("Some more lines added by Thomas 2");
+
+            Console.WriteLine("Some more lines added by Thomas 3 more changes ");
+            Console.WriteLine("Some more lines added by Thomas 3.1 more changes ");
         }
     }
 }
